@@ -1,19 +1,12 @@
-import { ServiceCard } from "./components/ServiceCard";
+import { API_URL } from "./config/api";
 
 function App() {
   return (
     <main>
-      <h1>DevOps Control Center</h1>
+      <h1>Portfolio Platform</h1>
 
-      <ServiceCard
-        name="Payment API"
-        status="online"
-      />
-
-      <ServiceCard
-        name="Authentication API"
-        status="offline"
-      />
+      <p>Frontend status: Running</p>
+      <p>API configured: {API_URL}</p>
     </main>
   );
 }
