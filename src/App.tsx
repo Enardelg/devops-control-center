@@ -1,6 +1,7 @@
 
 import { API_URL } from "./config/api";
 import { BackendStatus } from "./components/BackendStatus";
+import { ServicesDashboard } from "./components/ServicesDashboard";
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
 
       <p>Frontend status: Running</p>
       <p>API configured: {API_URL}</p>
+
       <BackendStatus />
+      <ServicesDashboard />
     </main>
   );
 }
