@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { API_URL } from "./config/api";
-import { getHealth } from "./service/healthApi";
+import { getHealth } from "./services/healthApi";
 
 function App() {
   useEffect(() => {
