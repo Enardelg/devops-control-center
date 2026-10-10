@@ -1,23 +1,15 @@
-import { useEffect } from "react";
+
 import { API_URL } from "./config/api";
-import { getHealth } from "./services/healthApi";
+import { BackendStatus } from "./components/BackendStatus";
 
 function App() {
-  useEffect(() => {
-  getHealth()
-    .then((data) => {
-      console.log("Backend health:", data);
-    })
-    .catch((error) => {
-      console.error("Backend error:", error);
-    });
-}, []);
   return (
     <main>
       <h1>Portfolio Platform</h1>
 
       <p>Frontend status: Running</p>
       <p>API configured: {API_URL}</p>
+      <BackendStatus />
     </main>
   );
 }
