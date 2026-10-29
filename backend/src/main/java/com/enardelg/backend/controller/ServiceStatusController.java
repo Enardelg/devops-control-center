@@ -1,6 +1,5 @@
 package com.enardelg.backend.controller;
 
-
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,7 +21,6 @@ public class ServiceStatusController {
     public List<ServiceStatus> getServices() {
         return List.of(
             new ServiceStatus("Spring Boot API", "UP"),
-            new ServiceStatus("FastAPI Service", "UP"),
             new ServiceStatus("Database", "DOWN")
         );
     }

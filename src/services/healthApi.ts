@@ -4,6 +4,7 @@ import { API_URL } from "../config/api";
 export type HealthResponse = {
   status: string;
   service: string;
+  fastApiService: string;
 };
 
 export async function getHealth(): Promise<HealthResponse> {
