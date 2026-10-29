@@ -4,16 +4,21 @@ import {
   type HealthResponse,
 } from "../services/healthApi";
 
-export function BackendStatus() {
+type BackendStatusProps = {
+  refreshKey: number;
+};
+
+export function BackendStatus({ refreshKey }: BackendStatusProps) {
   const [health, setHealth] = useState<HealthResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let active = true;
 
     async function loadHealth() {
+      setLoading(true);
+
       try {
         const data = await getHealth();
 
@@ -38,13 +43,7 @@ export function BackendStatus() {
     return () => {
       active = false;
     };
-  }, [attempt]);
-
-  function refreshStatus() {
-    setLoading(true);
-    setError(null);
-    setAttempt((current) => current + 1);
-  }
+  }, [refreshKey]);
 
   if (loading) {
     return <p>Consultando el backend...</p>;
@@ -58,10 +57,6 @@ export function BackendStatus() {
         <p role="alert">
           Backend: DOWN — {error}
         </p>
-
-        <button type="button" onClick={refreshStatus}>
-          Reintentar conexión
-        </button>
       </section>
     );
   }
@@ -70,10 +65,6 @@ export function BackendStatus() {
     return (
       <section>
         <p>Sin información del backend</p>
-
-        <button type="button" onClick={refreshStatus}>
-          Reintentar conexión
-        </button>
       </section>
     );
   }
@@ -85,10 +76,6 @@ export function BackendStatus() {
       <p>Servicio: {health.service}</p>
       <p>Spring Boot API: {health.status}</p>
       <p>FastAPI Service: {health.fastApiService}</p>
-
-      <button type="button" onClick={refreshStatus}>
-        Actualizar estado
-      </button>
     </section>
   );
 }

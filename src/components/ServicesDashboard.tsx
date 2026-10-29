@@ -1,10 +1,15 @@
-
 import { useEffect, useState } from "react";
 import { getServices } from "../services/serviceStatusApi";
 import type { ServiceStatus } from "../types/service";
 import { ServiceStatusCard } from "./ServiceStatusCard";
 
-export function ServicesDashboard() {
+type ServicesDashboardProps = {
+  refreshKey: number;
+};
+
+export function ServicesDashboard({
+  refreshKey,
+}: ServicesDashboardProps) {
   const [services, setServices] = useState<ServiceStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -13,6 +18,9 @@ export function ServicesDashboard() {
     let active = true;
 
     async function loadServices() {
+      setLoading(true);
+      setError(null);
+
       try {
         const data = await getServices();
 
@@ -35,7 +43,7 @@ export function ServicesDashboard() {
     return () => {
       active = false;
     };
-  }, []);
+  }, [refreshKey]);
 
   if (loading) {
     return <p>Cargando servicios...</p>;
